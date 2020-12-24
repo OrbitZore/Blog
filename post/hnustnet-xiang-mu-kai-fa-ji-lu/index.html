@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>HNUSTnet项目开发记录 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1608785990641">
+<link rel="stylesheet" href="https://z3475.work/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="项目地址：OrbitZore/HNUSTnet
+因为湖科大的校园网存在莫名其妙的失去登录状态的问题，于是想写个项目解决。🤔
+加上最近读《Effective C++》，想要考验一下自己的C++水平。于是就决定用C++实现。👏
+粗略想了下技..." />
+    <meta name="keywords" content="开发,项目,C++,Boost" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://z3475.work">
+        <img src="https://z3475.work/images/avatar.png?v=1608785990641" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/OrbitZore" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+          <a class="social-link" href="https://www.zhihu.com/people/z3475" target="_blank">
+            <i class="fab fa-zhihu"></i>
+          </a>
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">HNUSTnet项目开发记录</h2>
+            <div class="post-date">2020-12-24</div>
+            
+              <div class="feature-container" style="background-image: url('https://z3475.work/post-images/hnustnet-xiang-mu-kai-fa-ji-lu.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>项目地址：<strong><a href="https://github.com/OrbitZore/HNUSTnet">OrbitZore/HNUSTnet</a></strong></p>
+<p>因为湖科大的校园网存在莫名其妙的失去登录状态的问题，于是想写个项目解决。🤔</p>
+<p>加上最近读《Effective C++》，想要考验一下自己的C++水平。于是就决定用C++实现。👏</p>
+<p>粗略想了下技术栈。因为想体验一下跨平台，于是就上了<code>cmake</code>编译，附带使用<code>boost::asio</code>作为跨平台网络库。这样一个大体的框架就被敲定了，剩下就是艰难的实现过程了。</p>
+<p>但在实现的过程中遇到了麻烦的编码问题。想要代码跨平台，字符常量最好使用UTF-8编码（代码内使用u8&quot;&quot;声明一个字符串常量）。但是TCP上的HTTP传输内容编码为GB2312。考虑再三。舍弃掉代码内字符串分开编码的方案，使用<code>Iconv</code>这一C库将GB2312转换为UTF-8。</p>
+<h3 id="cmake">CMake</h3>
+<h4 id="cmakeliststxt">CMakeLists.txt</h4>
+<p>在命令行中运行<code>cmake &lt;DIR&gt;</code>，<code>cmake</code>会检查目录下的<code>CMakeLists.txt</code>。并解释执行<code>CMakeLists.txt</code>内容。</p>
+<h4 id="声明项目名">声明项目名</h4>
+<pre><code class="language-cmake">project (&lt;Project Name&gt;)
+</code></pre>
+<h4 id="包含子项目">包含子项目</h4>
+<pre><code class="language-cmake">add_subdirectory (&lt;DIR&gt;)
+</code></pre>
+<p>CMake会寻找目录下<code>CMakeLists.txt</code>，类似调用函数一样的调用解释执行此<code>CMakeLists.txt</code>。</p>
+<h4 id="在项目中引入外部库">在项目中引入外部库</h4>
+<h5 id="寻找外部库">寻找外部库</h5>
+<p><strong>库名一律首字母大写其他小写</strong></p>
+<pre><code class="language-cmake">find_package(&lt;name&gt;)
+</code></pre>
+<p>适用于一些C库<code>Threads</code>,<code>Iconv</code>等</p>
+<p><code>Boost</code>依赖<code>Threads</code></p>
+<pre><code class="language-cmake">find_package(&lt;name&gt; COMPONENTS &lt;lib1&gt; [lib2 ...])
+</code></pre>
+<p>像<code>Boost</code>这种包含很多子库的大库来说，为了避免引入不必要的库使编译缓慢。在寻找时指出子库成为了一个好选择。</p>
+<p>本项目寻找<code>Boost::system</code>以解决<code>Boost::Asio</code>依赖问题</p>
+<p>适用于一些大型C++库</p>
+<pre><code class="language-cmake">find_path(BOOST_ASIO_INCLUDE_DIRS &quot;boost/asio.hpp&quot;)
+</code></pre>
+<p>本项目会用到<code>Boost.Asio</code>，其为<code>Headers Only</code>类型的库。引入时只需Include头文件就行。这个语句作用为寻找Asio的头文件<code>boost/asio.hpp</code>，并将其目录赋值给BOOST_ASIO_INCLUDE_DIRS变量</p>
+<p><code>find_package</code>会在一些目录中寻找<code>&lt;name&gt;.cmake</code>的文件（其实还有找很多其他文件，因不在本项目内所以略过，可参考<a href="https://zhuanlan.zhihu.com/p/97369704">Cmake之深入理解find_package()的用法</a>），其包含了寻找<code>&lt;name&gt;</code>这个库并引入到cmake的步骤。一般会初始化<code>&lt;name&gt;_INCLUDE_DIRS</code>、<code>&lt;name&gt;_LIBRARY_DIRS</code>和<code>&lt;name&gt;_FOUND</code>这三个常量。含义分别为这个库的头文件目录，<code>*.obj</code>目录，库是否找到了。</p>
+<p>某些<code>&lt;name&gt;.cmake</code>会检查一些关于需要引用库的设置变量。本项目即用到了<code>Boost_USE_STATIC_LIBS</code>等，均可在下文介绍的文档中查询。</p>
+<p>CMake中已经包含了一些热门库的<code>&lt;name&gt;.cmake</code>文件，本项目中所有库均为如此。官方文档地址<a href="https://cmake.org/cmake/help/v3.19/manual/cmake-modules.7.html#find-modules">cmake-modules(7) — CMake 3.19.1 Documentation</a>。</p>
+<h5 id="引入头文件">引入头文件</h5>
+<p>以下做法将会把头文件引入所有子项目。因本项目仅包含一个子项目所以此法可行。如多个子项目可使用<code>target_</code>系列函数。</p>
+<pre><code class="language-cmake">include_directories(&lt;DIRS1&gt; [DIRS2 ...])
+</code></pre>
+<h5 id="引入obj文件">引入<code>*.obj</code>文件</h5>
+<p>以下做法将会把<code>*.obj</code>文件引入所有子项目。因本项目仅包含一个子项目所以此法可行。如多个子项目可使用<code>target_</code>系列函数。</p>
+<pre><code class="language-cmake">link_libraries([item1 [item2 [...]]]
+               [[debug|optimized|general] &lt;item&gt;] ...)
+</code></pre>
+<h3 id="添加源代码和头文件至项目">添加源代码和头文件至项目</h3>
+<pre><code class="language-cmake">add_executable (HNUSTnet &lt;sources1&gt; [sources2])
+</code></pre>
+<h2 id="项目源代码文件说明">项目源代码文件说明</h2>
+<table>
+<thead>
+<tr>
+<th>源代码文件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>misc.cpp</td>
+<td>提供一些工具函数</td>
+</tr>
+<tr>
+<td>iconv.hpp</td>
+<td>提供Iconv的C++封装 by Yuya Unno</td>
+</tr>
+<tr>
+<td>TCPclient.cpp</td>
+<td>基于Boost::Asio抽象TCP连接</td>
+</tr>
+<tr>
+<td>HTTPclient.cpp</td>
+<td>基于TCPclient.cpp提供简单的HTTP封装，并使用iconv.hpp转码</td>
+</tr>
+<tr>
+<td>HNUSTnet.cpp</td>
+<td>基于HTTPclient.cpp提供login.hnust.cn的API封装，并提供自动连接操作</td>
+</tr>
+<tr>
+<td>main.cpp</td>
+<td>命令行程序化HNUSTnet.cpp</td>
+</tr>
+</tbody>
+</table>
+<h2 id="依赖库相关资料">依赖库相关资料</h2>
+<p><a href="https://think-async.com/Asio/boost_asio_1_18_0/doc/html/boost_asio/reference.html">Boost::Asio官方文档</a></p>
+<p>u1s1这官方文档比CPP reference难读多了..</p>
+<p><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3388.pdf">Using Asio with C++11</a></p>
+<p>介绍Asio的简单使用</p>
+<p><a href="https://www.boost.org/doc/libs/1_74_0/">Boost</a></p>
+<p>Boost的各个子库</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://z3475.work/tag/w_pAqZtTE/" class="tag">
+                    开发
+                  </a>
+                
+                  <a href="https://z3475.work/tag/P8NBlTr-Z2/" class="tag">
+                    项目
+                  </a>
+                
+                  <a href="https://z3475.work/tag/d6RkNLRacq/" class="tag">
+                    C++
+                  </a>
+                
+                  <a href="https://z3475.work/tag/O854OlqRWU/" class="tag">
+                    Boost
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://z3475.work/post/hello-gridea/">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

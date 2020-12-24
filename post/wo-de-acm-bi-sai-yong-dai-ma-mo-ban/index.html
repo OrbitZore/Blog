@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>我的ACM比赛用代码模板 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1608785990641">
+<link rel="stylesheet" href="https://z3475.work/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="此文章用于总结在日常训练以及比赛时积累的可复用常见代码，以及可以加速代码书写的一些模板。
+面向C++11标准版本
+Features
+
+定义了比赛常用long long,vector的简化名称
+用于输出日志进行代码差错及运行分析的debug(..." />
+    <meta name="keywords" content="ACM,C++" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://z3475.work">
+        <img src="https://z3475.work/images/avatar.png?v=1608785990641" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/OrbitZore" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+          <a class="social-link" href="https://www.zhihu.com/people/z3475" target="_blank">
+            <i class="fab fa-zhihu"></i>
+          </a>
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">我的ACM比赛用代码模板</h2>
+            <div class="post-date">2020-12-24</div>
+            
+              <div class="feature-container" style="background-image: url('https://z3475.work/post-images/wo-de-acm-bi-sai-yong-dai-ma-mo-ban.png')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>此文章用于总结在日常训练以及比赛时积累的可复用常见代码，以及可以加速代码书写的一些模板。</p>
+<h3 id="面向c11标准版本">面向C++11标准版本</h3>
+<p>Features</p>
+<ul>
+<li>定义了比赛常用long long,vector的简化名称</li>
+<li>用于输出日志进行代码差错及运行分析的debug()函数（配合编译参数-DLOCAL食用）</li>
+<li>常用的cmax和cmin函数</li>
+<li>gcd的实现</li>
+<li>快速读入一个整数gi()</li>
+<li>简单的矢量类</li>
+</ul>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef tuple&lt;int,int&gt; tii;
+typedef tuple&lt;ll,ll&gt; tll;
+typedef vector&lt;int&gt; vi;
+typedef vector&lt;ll&gt; vll;
+typedef vector&lt;tii&gt; vtii;
+typedef vector&lt;tll&gt; vtll;
+typedef vector&lt;vector&lt;int&gt;&gt; vvi;
+#define INF 0x3f3f3f3f
+#define X(t) get&lt;0&gt;(t)
+#define Y(t) get&lt;1&gt;(t)
+#define Z(t) get&lt;2&gt;(t)
+#define pb push_back
+#define dlt decltype
+#define debug(...) _debug(#__VA_ARGS__, __VA_ARGS__)
+#ifdef LOCAL
+constexpr const bool local=true;
+#else
+constexpr const bool local=false;
+#endif
+ 
+template &lt;typename T&gt;
+void _debug(const char* format,const T t) {
+    if (local) cerr &lt;&lt; format &lt;&lt; '=' &lt;&lt; t &lt;&lt; endl;
+}
+
+template &lt;class First, class... Rest&gt;
+void _debug(const char* format,const First first,const Rest... rest) {
+    if (local){
+        while (*format != ',') cerr &lt;&lt; *format++;
+        cerr &lt;&lt; '=' &lt;&lt; first &lt;&lt; &quot;,&quot;;
+        _debug(format + 1, rest...);    
+    }
+}
+
+template &lt;typename T&gt;
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const vector&lt;T&gt;&amp; V) {
+    if (local) os &lt;&lt; &quot;[&quot;;
+    for (const auto&amp; vv : V) os &lt;&lt; vv &lt;&lt; &quot; &quot;;
+    if (local) os &lt;&lt; &quot;]&quot;;
+    return os;
+}
+
+template&lt;class Tuple,size_t N&gt;
+struct TuplePrinter {
+    static void print(ostream&amp; os,const Tuple&amp; t) {
+        TuplePrinter&lt;Tuple, N-1&gt;::print(os,t);
+        os &lt;&lt; &quot; &quot; &lt;&lt; get&lt;N-1&gt;(t);
+    }
+};
+template&lt;class Tuple&gt;
+struct TuplePrinter&lt;Tuple,1&gt;{
+    static void print(ostream&amp; os,const Tuple&amp; t) {
+    	os &lt;&lt; get&lt;0&gt;(t);
+    }
+};
+ 
+template&lt;typename... Rest&gt;
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const tuple&lt;Rest...&gt;&amp; V) {
+    if (local) os &lt;&lt; &quot;(&quot;;
+	TuplePrinter&lt;decltype(V),sizeof...(Rest)&gt;::print(os,V);
+    if (local) os &lt;&lt; &quot;)&quot;;
+    return os;
+}
+template&lt;class T1,class T2&gt;
+bool cmin(T1 &amp;a,const T2 b){return a&gt;b?a=b,1:0;}
+template&lt;class T1,class T2&gt;
+bool cmax(T1 &amp;a,const T2 b){return a&lt;b?a=b,1:0;}
+template&lt;class T1,class T2,class ...T3&gt;
+bool cmin(T1 &amp;a,const T2 b,const T3 ...rest){return cmin(a,b)|cmin(a,rest...);}
+template&lt;class T1,class T2,class ...T3&gt;
+bool cmax(T1 &amp;a,const T2 b,const T3 ...rest){return cmax(a,b)|cmax(a,rest...);}
+ 
+ll _gcd(ll a,ll b){return b==0?a:_gcd(b,a%b);}
+ll gcd(ll a,ll b){if (a&lt;b) swap(a,b);return _gcd(a,b);}
+ll gi(){
+    ll i=0;bool f=false;char c;
+    while (!isdigit(c=cin.get())&amp;&amp;cin.good()) f=c=='-';
+    if (!cin.good()) return 0;
+    do i=(i&lt;&lt;3)+(i&lt;&lt;1)+c-'0'; while (isdigit(c=cin.get()));
+    return f?-i:i;
+}
+
+struct point{
+    double x, y;
+    point(double x =0,double y=0):x(x),y(y){}
+    point operator +(const point &amp;o) {return point(x+o.x, y+o.y);}
+    point operator -(const point &amp;o) {return point(x-o.x,y-o.y);}
+    point operator *(const double &amp;o) {return point(x*o,y*o);}
+    point operator /(const double &amp;o) {return point(x/o,y/o);}
+};
+double len2(const point &amp;a){return a.x*a.x+a.y*a.y;}
+double len(const point &amp;a){return sqrt(len2(a));}
+double dot(const point &amp;a,const point &amp;b){return a.x*b.x+a.y*b.y;}
+double crs(const point &amp;a,const point &amp;b){return a.x*b.y-a.y*b.x;}
+
+struct solution{
+    
+    solution(){
+        
+    }
+    
+    void solve(){
+        
+    }
+};
+int main(){
+	ios::sync_with_stdio(false);
+	int T=gi();
+	while (T--&amp;&amp;cin.good()){
+		[](){
+			solution().solve();
+		}();
+	}
+}
+</code></pre>
+<h3 id="面向c14标准版本">面向C++14+标准版本</h3>
+<p>Feature</p>
+<ul>
+<li>添加Y算子，完善函数式编程支持</li>
+</ul>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef tuple&lt;int,int&gt; tii;
+typedef tuple&lt;ll,ll&gt; tll;
+typedef vector&lt;int&gt; vi;
+typedef vector&lt;ll&gt; vll;
+typedef vector&lt;tii&gt; vtii;
+typedef vector&lt;tll&gt; vtll;
+typedef vector&lt;vector&lt;int&gt;&gt; vvi;
+#define INF 0x3f3f3f3f
+#define X(t) get&lt;0&gt;(t)
+#define Y(t) get&lt;1&gt;(t)
+#define Z(t) get&lt;2&gt;(t)
+#define pb push_back
+#define dlt decltype
+#define debug(...) _debug(#__VA_ARGS__, __VA_ARGS__)
+#ifdef LOCAL
+constexpr const bool local=true;
+#else
+constexpr const bool local=false;
+#endif
+ 
+template &lt;typename T&gt;
+void _debug(const char* format,const T t) {
+    if (local) cerr &lt;&lt; format &lt;&lt; '=' &lt;&lt; t &lt;&lt; endl;
+}
+
+template &lt;class First, class... Rest&gt;
+void _debug(const char* format,const First first,const Rest... rest) {
+    if (local){
+        while (*format != ',') cerr &lt;&lt; *format++;
+        cerr &lt;&lt; '=' &lt;&lt; first &lt;&lt; &quot;,&quot;;
+        _debug(format + 1, rest...);    
+    }
+}
+
+template &lt;typename T&gt;
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const vector&lt;T&gt;&amp; V) {
+    if (local) os &lt;&lt; &quot;[&quot;;
+    for (const auto&amp; vv : V) os &lt;&lt; vv &lt;&lt; &quot; &quot;;
+    if (local) os &lt;&lt; &quot;]&quot;;
+    return os;
+}
+
+template&lt;class Tuple,size_t N&gt;
+struct TuplePrinter {
+    static void print(ostream&amp; os,const Tuple&amp; t) {
+        TuplePrinter&lt;Tuple, N-1&gt;::print(os,t);
+        os &lt;&lt; &quot; &quot; &lt;&lt; get&lt;N-1&gt;(t);
+    }
+};
+template&lt;class Tuple&gt;
+struct TuplePrinter&lt;Tuple,1&gt;{
+    static void print(ostream&amp; os,const Tuple&amp; t) {
+    	os &lt;&lt; get&lt;0&gt;(t);
+    }
+};
+ 
+template&lt;typename... Rest&gt;
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const tuple&lt;Rest...&gt;&amp; V) {
+    if (local) os &lt;&lt; &quot;(&quot;;
+	TuplePrinter&lt;decltype(V),sizeof...(Rest)&gt;::print(os,V);
+    if (local) os &lt;&lt; &quot;)&quot;;
+    return os;
+}
+template&lt;class T1,class T2&gt;
+bool cmin(T1 &amp;a,const T2 b){return a&gt;b?a=b,1:0;}
+template&lt;class T1,class T2&gt;
+bool cmax(T1 &amp;a,const T2 b){return a&lt;b?a=b,1:0;}
+template&lt;class T1,class T2,class ...T3&gt;
+bool cmin(T1 &amp;a,const T2 b,const T3 ...rest){return cmin(a,b)|cmin(a,rest...);}
+template&lt;class T1,class T2,class ...T3&gt;
+bool cmax(T1 &amp;a,const T2 b,const T3 ...rest){return cmax(a,b)|cmax(a,rest...);}
+ 
+ll _gcd(ll a,ll b){return b==0?a:_gcd(b,a%b);}
+ll gcd(ll a,ll b){if (a&lt;b) swap(a,b);return _gcd(a,b);}
+ll gi(){
+    ll i=0;bool f=false;char c;
+    while (!isdigit(c=cin.get())&amp;&amp;cin.good()) f=c=='-';
+    if (!cin.good()) return 0;
+    do i=(i&lt;&lt;3)+(i&lt;&lt;1)+c-'0'; while (isdigit(c=cin.get()));
+    return f?-i:i;
+}
+
+struct point{
+    double x, y;
+    point(double x =0,double y=0):x(x),y(y){}
+    point operator +(const point &amp;o) {return point(x+o.x, y+o.y);}
+    point operator -(const point &amp;o) {return point(x-o.x,y-o.y);}
+    point operator *(const double &amp;o) {return point(x*o,y*o);}
+    point operator /(const double &amp;o) {return point(x/o,y/o);}
+};
+double len2(const point &amp;a){return a.x*a.x+a.y*a.y;}
+double len(const point &amp;a){return sqrt(len2(a));}
+double dot(const point &amp;a,const point &amp;b){return a.x*b.x+a.y*b.y;}
+double crs(const point &amp;a,const point &amp;b){return a.x*b.y-a.y*b.x;}
+
+template &lt;typename F&gt;
+struct Y{
+    Y(F f) :_f(f){}
+    template &lt;typename... Args&gt;
+    auto operator()(Args&amp;&amp;... t) const{
+        return _f(*this, std::forward&lt;Args&gt;(t)...);
+    }
+    F _f;
+};
+template &lt;typename F&gt;
+Y&lt;F&gt; fix(F&amp;&amp; f){
+    return Y&lt;F&gt;(forward&lt;F&gt;(f));
+}
+
+int main(){
+	ios::sync_with_stdio(false);
+	int T=gi();
+	while (T--&amp;&amp;cin.good()){
+		[](){
+			
+		}();
+	}
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://z3475.work/tag/yxTvKz70u/" class="tag">
+                    ACM
+                  </a>
+                
+                  <a href="https://z3475.work/tag/d6RkNLRacq/" class="tag">
+                    C++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://z3475.work/post/hnustnet-xiang-mu-kai-fa-ji-lu/">
+                  <h3 class="post-title">
+                    HNUSTnet项目开发记录
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>
