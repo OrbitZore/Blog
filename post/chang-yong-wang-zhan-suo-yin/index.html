@@ -1,14 +1,19 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>常用网站索引 | z3475&#39;s Blog</title>
+<meta name="description" content="学习，思考，输出">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611414558738">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611415572233">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://z3475.work/styles/main.css">
 
 
@@ -19,114 +24,88 @@
   
 
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YD4X4QFFVH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-YD4X4QFFVH');
-</script>
-
-
-    <meta name="description" content="有用的网站太多啦！
-数学向
-Geogebra图形计算器
-Desmos | Graphing Calculator
-wolframalpha：万能计算器
-csacademy/graph_editor：图可视化
-csacademy/diffin..." />
-    <meta name="keywords" content="索引" />
   </head>
   <body>
     <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://z3475.work">
-        <img src="https://z3475.work/images/avatar.png?v=1611414558738" class="site-logo">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://z3475.work">
+        <img class="avatar" src="https://z3475.work/images/avatar.png?v=1611415572233" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://z3475.work">
         <h1 class="site-title">z3475&#39;s Blog</h1>
       </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
     </div>
-    <div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
         
-          <a href="/" class="site-nav">
+          <a href="/" class="menu purple-link">
             首页
           </a>
         
       
         
-          <a href="/archives" class="site-nav">
+          <a href="/archives" class="menu purple-link">
             归档
           </a>
         
       
         
-          <a href="/tags" class="site-nav">
+          <a href="/tags" class="menu purple-link">
             标签
           </a>
         
       
         
-          <a href="/post/about" class="site-nav">
+          <a href="/post/about" class="menu purple-link">
             关于
           </a>
         
       
     </div>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
-        
-          <a class="social-link" href="https://github.com/OrbitZore" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
-      
-        
-      
-        
-      
-        
-          <a class="social-link" href="https://www.zhihu.com/people/z3475" target="_blank">
-            <i class="fab fa-zhihu"></i>
-          </a>
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      学习，思考，输出
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
-    </div>
-  </div>
-</div>
+</transition>
 
 
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">常用网站索引</h2>
-            <div class="post-date">2021-01-14</div>
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://z3475.work/post-images/chang-yong-wang-zhan-suo-yin.png')">
+            </div>
+          
+          <h2 class="post-title">常用网站索引</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2021-01-14</span>
             
-              <div class="feature-container" style="background-image: url('https://z3475.work/post-images/chang-yong-wang-zhan-suo-yin.png')">
-              </div>
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://z3475.work/tag/CNq6Bmtoi/">
+                    索引
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content" v-pre>
-              <p>有用的网站太多啦！</p>
+          </div>
+          <div class="post-content">
+            <p>有用的网站太多啦！</p>
 <h3 id="数学向">数学向</h3>
 <p><a href="https://www.geogebra.org/graphing">Geogebra图形计算器</a></p>
 <p><a href="https://www.desmos.com/calculator">Desmos | Graphing Calculator</a></p>
@@ -171,45 +150,51 @@ csacademy/diffin..." />
 <h3 id="idc">IDC</h3>
 <p><a href="https://lehuidc.com/index/">乐虎IDC - 稳定的虚拟主机-虚拟主机空间</a></p>
 
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://z3475.work/tag/CNq6Bmtoi/" class="tag">
-                    索引
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://z3475.work/post/wo-de-acm-bi-sai-yong-dai-ma-mo-ban/">
-                  <h3 class="post-title">
-                    z3475的ACM比赛用代码模板
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-              
-
-              
-                <div id="disqus_thread" data-aos="fade-in"></div>
-              
-            
-
           </div>
-
         </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://z3475.work/post/wo-de-acm-bi-sai-yong-dai-ma-mo-ban/">
+              <h3 class="post-title">
+                下一篇：z3475的ACM比赛用代码模板
+              </h3>
+            </a>
+          </div>
+          
       </div>
+
+      
+        
+
+        
+          <div id="disqus_thread"></div>
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">学习，思考，输出</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+</div>
+
+
     </div>
+    <script type="application/javascript">
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script type="application/javascript">
-
-AOS.init();
+hljs.initHighlightingOnLoad()
 
 var app = new Vue({
   el: '#app',
@@ -219,13 +204,6 @@ var app = new Vue({
 })
 
 </script>
-
-
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad()
-  </script>
-
 
 
 

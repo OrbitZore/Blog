@@ -1,14 +1,19 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>z3475的ACM比赛用代码模板 | z3475&#39;s Blog</title>
+<meta name="description" content="学习，思考，输出">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611414558738">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611415572233">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://z3475.work/styles/main.css">
 
 
@@ -19,113 +24,95 @@
   
 
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YD4X4QFFVH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-YD4X4QFFVH');
-</script>
-
-
-    <meta name="description" content="此文章用于总结在日常训练以及比赛时积累的可复用常见代码，以及可以加速代码书写的一些模板。
-面向C++11标准版本
-Features
-
-定义了比赛常用long long,vector的简化名称
-用于输出日志进行代码差错及运行分析的debug(..." />
-    <meta name="keywords" content="ACM,C++" />
   </head>
   <body>
     <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://z3475.work">
-        <img src="https://z3475.work/images/avatar.png?v=1611414558738" class="site-logo">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://z3475.work">
+        <img class="avatar" src="https://z3475.work/images/avatar.png?v=1611415572233" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://z3475.work">
         <h1 class="site-title">z3475&#39;s Blog</h1>
       </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
     </div>
-    <div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
         
-          <a href="/" class="site-nav">
+          <a href="/" class="menu purple-link">
             首页
           </a>
         
       
         
-          <a href="/archives" class="site-nav">
+          <a href="/archives" class="menu purple-link">
             归档
           </a>
         
       
         
-          <a href="/tags" class="site-nav">
+          <a href="/tags" class="menu purple-link">
             标签
           </a>
         
       
         
-          <a href="/post/about" class="site-nav">
+          <a href="/post/about" class="menu purple-link">
             关于
           </a>
         
       
     </div>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
-        
-          <a class="social-link" href="https://github.com/OrbitZore" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
-      
-        
-      
-        
-      
-        
-          <a class="social-link" href="https://www.zhihu.com/people/z3475" target="_blank">
-            <i class="fab fa-zhihu"></i>
-          </a>
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      学习，思考，输出
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
-    </div>
-  </div>
-</div>
+</transition>
 
 
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">z3475的ACM比赛用代码模板</h2>
-            <div class="post-date">2020-12-24</div>
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://z3475.work/post-images/wo-de-acm-bi-sai-yong-dai-ma-mo-ban.png')">
+            </div>
+          
+          <h2 class="post-title">z3475的ACM比赛用代码模板</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-12-24</span>
             
-              <div class="feature-container" style="background-image: url('https://z3475.work/post-images/wo-de-acm-bi-sai-yong-dai-ma-mo-ban.png')">
-              </div>
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://z3475.work/tag/yxTvKz70u/">
+                    ACM
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://z3475.work/tag/d6RkNLRacq/">
+                    C++
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content" v-pre>
-              <p>此文章用于总结在日常训练以及比赛时积累的可复用常见代码，以及可以加速代码书写的一些模板。</p>
+          </div>
+          <div class="post-content">
+            <p>此文章用于总结在日常训练以及比赛时积累的可复用常见代码，以及可以加速代码书写的一些模板。</p>
 <h3 id="面向c11标准版本">面向C++11标准版本</h3>
 <p>Features</p>
 <ul>
@@ -382,49 +369,51 @@ int main(){
 }
 </code></pre>
 
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://z3475.work/tag/yxTvKz70u/" class="tag">
-                    ACM
-                  </a>
-                
-                  <a href="https://z3475.work/tag/d6RkNLRacq/" class="tag">
-                    C++
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://z3475.work/post/hnustnet-xiang-mu-kai-fa-ji-lu/">
-                  <h3 class="post-title">
-                    HNUSTnet项目开发记录
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-              
-
-              
-                <div id="disqus_thread" data-aos="fade-in"></div>
-              
-            
-
           </div>
-
         </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://z3475.work/post/hnustnet-xiang-mu-kai-fa-ji-lu/">
+              <h3 class="post-title">
+                下一篇：HNUSTnet项目开发记录
+              </h3>
+            </a>
+          </div>
+          
       </div>
+
+      
+        
+
+        
+          <div id="disqus_thread"></div>
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">学习，思考，输出</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+</div>
+
+
     </div>
+    <script type="application/javascript">
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script type="application/javascript">
-
-AOS.init();
+hljs.initHighlightingOnLoad()
 
 var app = new Vue({
   el: '#app',
@@ -434,13 +423,6 @@ var app = new Vue({
 })
 
 </script>
-
-
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad()
-  </script>
-
 
 
 
