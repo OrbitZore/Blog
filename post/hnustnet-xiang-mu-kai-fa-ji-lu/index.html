@@ -1,132 +1,119 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
-<title>HNUSTnet项目开发记录 | z3475&#39;s Blog</title>
-<meta name="description" content="学习，思考，输出">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611415572233">
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>z3475&#39;s Blog</title>
+<meta name="description" content="学习，思考，输出" />
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611416424819">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
 <link rel="stylesheet" href="https://z3475.work/styles/main.css">
-
-
-  
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
 
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://z3475.work">
-        <img class="avatar" src="https://z3475.work/images/avatar.png?v=1611415572233" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://z3475.work">
-        <h1 class="site-title">z3475&#39;s Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://z3475.work">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1611416424819" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">z3475&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#cmake">CMake</a>
+<ul>
+<li><a href="#cmakeliststxt">CMakeLists.txt</a></li>
+<li><a href="#%E5%A3%B0%E6%98%8E%E9%A1%B9%E7%9B%AE%E5%90%8D">声明项目名</a></li>
+<li><a href="#%E5%8C%85%E5%90%AB%E5%AD%90%E9%A1%B9%E7%9B%AE">包含子项目</a></li>
+<li><a href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%BC%95%E5%85%A5%E5%A4%96%E9%83%A8%E5%BA%93">在项目中引入外部库</a>
+<ul>
+<li><a href="#%E5%AF%BB%E6%89%BE%E5%A4%96%E9%83%A8%E5%BA%93">寻找外部库</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5%E5%A4%B4%E6%96%87%E4%BB%B6">引入头文件</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5obj%E6%96%87%E4%BB%B6">引入<code>*.obj</code>文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E6%BA%90%E4%BB%A3%E7%A0%81%E5%92%8C%E5%A4%B4%E6%96%87%E4%BB%B6%E8%87%B3%E9%A1%B9%E7%9B%AE">添加源代码和头文件至项目</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E6%BA%90%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E">项目源代码文件说明</a></li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E5%BA%93%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99">依赖库相关资料</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
     </div>
   </div>
 </div>
 
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
       
-        
-          <a href="/" class="menu purple-link">
-            首页
-          </a>
-        
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="menu purple-link">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="menu purple-link">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="menu purple-link">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
   </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-            <div class="feature-container" style="background-image: url('https://z3475.work/post-images/hnustnet-xiang-mu-kai-fa-ji-lu.jpg')">
-            </div>
-          
-          <h2 class="post-title">HNUSTnet项目开发记录</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-12-24</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://z3475.work/tag/w_pAqZtTE/">
-                    开发
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://z3475.work/tag/P8NBlTr-Z2/">
-                    项目
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://z3475.work/tag/d6RkNLRacq/">
-                    C++
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://z3475.work/tag/O854OlqRWU/">
-                    Boost
-                    
-                  </a>
-                
-              </span>
-            
-          </div>
-          <div class="post-content">
-            <p>项目地址：<strong><a href="https://github.com/OrbitZore/HNUSTnet">OrbitZore/HNUSTnet</a></strong></p>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">HNUSTnet项目开发记录</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-12-24 / 4 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://z3475.work/post-images/hnustnet-xiang-mu-kai-fa-ji-lu.jpg" alt="">
+        
+        <div class="post-content yue">
+          <p>项目地址：<strong><a href="https://github.com/OrbitZore/HNUSTnet">OrbitZore/HNUSTnet</a></strong></p>
 <p>因为湖科大的校园网存在莫名其妙的失去登录状态的问题，于是想写个项目解决。🤔</p>
 <p>加上最近读《Effective C++》，想要考验一下自己的C++水平。于是就决定用C++实现。👏</p>
 <p>粗略想了下技术栈。因为想体验一下跨平台，于是就上了<code>cmake</code>编译，附带使用<code>boost::asio</code>作为跨平台网络库。这样一个大体的框架就被敲定了，剩下就是艰难的实现过程了。</p>
@@ -214,83 +201,176 @@
 <p><a href="https://www.boost.org/doc/libs/1_74_0/">Boost</a></p>
 <p>Boost的各个子库</p>
 
-          </div>
         </div>
 
         
-          <div class="next-post">
-            <a class="purple-link" href="https://z3475.work/post/hello-gridea/">
-              <h3 class="post-title">
-                下一篇：Hello Gridea
-              </h3>
-            </a>
-          </div>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/w_pAqZtTE/">
+            <span class="flex-auto">开发</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/P8NBlTr-Z2/">
+            <span class="flex-auto">项目</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/d6RkNLRacq/">
+            <span class="flex-auto">C++</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/O854OlqRWU/">
+            <span class="flex-auto">Boost</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
           
-      </div>
+            <div class="prev-post">
+              <a href="https://z3475.work/post/wo-de-acm-bi-sai-yong-dai-ma-mo-ban/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  z3475的ACM比赛用代码模板
+                </h3>
+              </a>
+            </div>
+          
 
-      
+          
+            <div class="next-post">
+              <a href="https://z3475.work/post/hello-gridea/">
+                <h3 class="post-title">
+                  Hello Gridea
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
         
+          
 
-        
-          <div id="disqus_thread"></div>
-        
-      
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
 
-      <div class="site-footer">
-  <div class="slogan">学习，思考，输出</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
-</div>
+<div id="disqus_thread"></div>
 
+<script>
 
-    </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+var options = {
+  shortname: '',
+  apikey: 'IVIL72EYupd36SyIZbzIyzGD5IO6YAvkOuAfe1DsVeTm8qLc2h6ZegTM2fCaLGAe',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
 
 </script>
 
+          
+        
 
+      </div>
+    </div>
 
-  
+    <script src="https://z3475.work/media/prism.js"></script>  
+<script>
 
-  
-    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
-    <script>
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-    var options = {
-      shortname: '',
-      apikey: 'IVIL72EYupd36SyIZbzIyzGD5IO6YAvkOuAfe1DsVeTm8qLc2h6ZegTM2fCaLGAe',
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
     }
-    if ('') {
-      options.api = ''
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
     }
-    var dsqjs = new DisqusJS(options)
+  });
+});
 
-    </script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
   
-
-
-
-
   </body>
 </html>

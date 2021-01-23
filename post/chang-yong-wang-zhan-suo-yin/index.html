@@ -1,111 +1,119 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
-<title>常用网站索引 | z3475&#39;s Blog</title>
-<meta name="description" content="学习，思考，输出">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611415572233">
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>z3475&#39;s Blog</title>
+<meta name="description" content="学习，思考，输出" />
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611416424819">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
 <link rel="stylesheet" href="https://z3475.work/styles/main.css">
-
-
-  
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
 
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://z3475.work">
-        <img class="avatar" src="https://z3475.work/images/avatar.png?v=1611415572233" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://z3475.work">
-        <h1 class="site-title">z3475&#39;s Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://z3475.work">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1611416424819" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">z3475&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%95%B0%E5%AD%A6%E5%90%91">数学向</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%9C%BA">计算机</a>
+<ul>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E7%BD%91%E7%AB%99">软件网站</a></li>
+<li><a href="#%E7%BC%96%E7%A0%81">编码</a></li>
+<li><a href="#cc">C/C++</a></li>
+<li><a href="#go">Go</a></li>
+<li><a href="#latex">Latex</a></li>
+<li><a href="#oi-and-acm">OI and ACM</a></li>
+<li><a href="#mathematica">Mathematica</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5">业余无线电</a></li>
+<li><a href="#%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2">个人博客</a></li>
+<li><a href="#%E5%AA%92%E4%BD%93%E7%BD%91%E7%AB%99">媒体网站</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E5%85%83">二次元</a></li>
+<li><a href="#idc">IDC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
     </div>
   </div>
 </div>
 
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
       
-        
-          <a href="/" class="menu purple-link">
-            首页
-          </a>
-        
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="menu purple-link">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="menu purple-link">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="menu purple-link">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
   </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-            <div class="feature-container" style="background-image: url('https://z3475.work/post-images/chang-yong-wang-zhan-suo-yin.png')">
-            </div>
-          
-          <h2 class="post-title">常用网站索引</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2021-01-14</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://z3475.work/tag/CNq6Bmtoi/">
-                    索引
-                    
-                  </a>
-                
-              </span>
-            
-          </div>
-          <div class="post-content">
-            <p>有用的网站太多啦！</p>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">常用网站索引</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-01-14 / 2 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://z3475.work/post-images/chang-yong-wang-zhan-suo-yin.png" alt="">
+        
+        <div class="post-content yue">
+          <p>有用的网站太多啦！</p>
 <h3 id="数学向">数学向</h3>
 <p><a href="https://www.geogebra.org/graphing">Geogebra图形计算器</a></p>
 <p><a href="https://www.desmos.com/calculator">Desmos | Graphing Calculator</a></p>
@@ -150,83 +158,164 @@
 <h3 id="idc">IDC</h3>
 <p><a href="https://lehuidc.com/index/">乐虎IDC - 稳定的虚拟主机-虚拟主机空间</a></p>
 
-          </div>
         </div>
 
         
-          <div class="next-post">
-            <a class="purple-link" href="https://z3475.work/post/wo-de-acm-bi-sai-yong-dai-ma-mo-ban/">
-              <h3 class="post-title">
-                下一篇：z3475的ACM比赛用代码模板
-              </h3>
-            </a>
-          </div>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/CNq6Bmtoi/">
+            <span class="flex-auto">索引</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
           
-      </div>
+            <div class="prev-post">
+              <a href="https://z3475.work/post/ccchang-jian-de-keng/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  一些C/C++常见的坑
+                </h3>
+              </a>
+            </div>
+          
 
-      
+          
+            <div class="next-post">
+              <a href="https://z3475.work/post/wo-de-acm-bi-sai-yong-dai-ma-mo-ban/">
+                <h3 class="post-title">
+                  z3475的ACM比赛用代码模板
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
         
+          
 
-        
-          <div id="disqus_thread"></div>
-        
-      
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
 
-      <div class="site-footer">
-  <div class="slogan">学习，思考，输出</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
-</div>
+<div id="disqus_thread"></div>
 
+<script>
 
-    </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+var options = {
+  shortname: '',
+  apikey: 'IVIL72EYupd36SyIZbzIyzGD5IO6YAvkOuAfe1DsVeTm8qLc2h6ZegTM2fCaLGAe',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
 
 </script>
 
+          
+        
 
+      </div>
+    </div>
 
-  
+    <script src="https://z3475.work/media/prism.js"></script>  
+<script>
 
-  
-    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
-    <script>
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-    var options = {
-      shortname: '',
-      apikey: 'IVIL72EYupd36SyIZbzIyzGD5IO6YAvkOuAfe1DsVeTm8qLc2h6ZegTM2fCaLGAe',
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
     }
-    if ('') {
-      options.api = ''
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
     }
-    var dsqjs = new DisqusJS(options)
+  });
+});
 
-    </script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
   
-
-
-
-
   </body>
 </html>
