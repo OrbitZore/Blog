@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>【思路/代码】AtCoder Beginner Contest 189【DE】 | z3475&#39;s Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1611414558738">
+<link rel="stylesheet" href="https://z3475.work/styles/main.css">
+
+
+  
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YD4X4QFFVH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YD4X4QFFVH');
+</script>
+
+
+    <meta name="description" content="比赛链接：AtCoder Beginner Contest 189
+最后五分钟把E题交到F题上去了...
+D - Logical Expression
+题目大意：
+定义S[i]为操作符
+bool f=x[0];
+for (int i=1;i..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://z3475.work">
+        <img src="https://z3475.work/images/avatar.png?v=1611414558738" class="site-logo">
+        <h1 class="site-title">z3475&#39;s Blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/OrbitZore" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+          <a class="social-link" href="https://www.zhihu.com/people/z3475" target="_blank">
+            <i class="fab fa-zhihu"></i>
+          </a>
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      学习，思考，输出
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">【思路/代码】AtCoder Beginner Contest 189【DE】</h2>
+            <div class="post-date">2021-01-23</div>
+            
+            <div class="post-content" v-pre>
+              <p>比赛链接：<a href="https://atcoder.jp/contests/abc189/tasks">AtCoder Beginner Contest 189</a></p>
+<p>最后五分钟把E题交到F题上去了...</p>
+<h3 id="d-logical-expression">D - Logical Expression</h3>
+<p>题目大意：<br>
+定义S[i]为操作符</p>
+<pre><code class="language-cpp">bool f=x[0];
+for (int i=1;i&lt;=n;i++)
+    f=f S[i] x[i];
+</code></pre>
+<p>要求计算符合<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>=</mo><mo>=</mo><mi>t</mi><mi>r</mi><mi>u</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">f==true</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span></span></span></span>条件x数组的数量<br>
+简单DP</p>
+<pre><code class="language-cpp">struct solution{
+	int n;
+	vi v;
+	solution(){
+		n=gi();
+		v.pb(-1);
+		for (int i=1;i&lt;=n;i++){
+			string a;
+			cin &gt;&gt; a;
+			if (a[0]=='A') v.pb(1);
+			else v.pb(0);
+		}
+	}
+	
+	void solve(){
+		array&lt;array&lt;ll,2&gt;,120&gt; dp;
+		dp[0][1]=1;
+		dp[0][0]=1;
+		for (int i=1;i&lt;=n;i++){
+			if (v[i]){//AND
+				dp[i][0]=dp[i-1][0]*2+dp[i-1][1];
+				dp[i][1]=dp[i-1][1];
+			}else{//OR
+				dp[i][0]=dp[i-1][0];
+				dp[i][1]=dp[i-1][0]+dp[i-1][1]*2;
+			}
+		}
+		cout &lt;&lt; dp[n][1];
+	}
+};
+</code></pre>
+<h3 id="e-rotate-and-flip">E - Rotate and Flip</h3>
+<p>容易观察到，<code>1</code>,<code>2</code>操作涉及x,y之间的交换。如果排除这个交换来看所有操作都是线性变换，多个线性变换可合并且形式仍为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a*x+b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>。我们称其具有线性。</p>
+<p>定义点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>=</mo><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">p=(x,y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span><br>
+定义线性变换函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>a</mi><mo>∗</mo><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">l(x)=a*x+b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span><br>
+定义<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>p</mi><mo separator="true">,</mo><mi>l</mi><mn>1</mn><mo separator="true">,</mo><mi>l</mi><mn>2</mn><mo>)</mo><mo>=</mo><mo>(</mo><mi>l</mi><mn>1</mn><mo>(</mo><mi>p</mi><mi mathvariant="normal">.</mi><mi>x</mi><mo>)</mo><mo separator="true">,</mo><mi>l</mi><mn>2</mn><mo>(</mo><mi>p</mi><mi mathvariant="normal">.</mi><mi>y</mi><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">Linear(p,l1,l2)=(l1(p.x),l2(p.y))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mord">.</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mord">.</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span><br>
+线性即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>p</mi><mo separator="true">,</mo><mi>l</mi><mn>1</mn><mo separator="true">,</mo><mi>l</mi><mn>2</mn><mo>)</mo><mo separator="true">,</mo><mi>l</mi><mn>3</mn><mo separator="true">,</mo><mi>l</mi><mn>4</mn><mo>)</mo><mo>=</mo><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>p</mi><mo separator="true">,</mo><mi>l</mi><mn>3</mn><mo>(</mo><mi>l</mi><mn>1</mn><mo>)</mo><mo separator="true">,</mo><mi>l</mi><mn>4</mn><mo>(</mo><mi>l</mi><mn>2</mn><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">Linear(Linear(p,l1,l2),l3,l4)=Linear(p,l3(l1),l4(l2))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">4</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">3</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">4</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<p>加入了交换之后，单独对于每一个横或纵坐标也是线性的，意味着交换操作和线性变换操作可合并为题目要求的总操作。<br>
+定义<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">Swap(p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span>表示对点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span>的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>交换。</p>
+<p>考虑交换的性质：<br>
+1、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>p</mi><mo separator="true">,</mo><mi>l</mi><mn>1</mn><mo separator="true">,</mo><mi>l</mi><mn>2</mn><mo>)</mo><mo>)</mo><mo>=</mo><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>S</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo separator="true">,</mo><mi>l</mi><mn>2</mn><mo separator="true">,</mo><mi>l</mi><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">Swap(Linear(p,l1,l2))=Linear(Swap(p),l2,l1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mclose">)</span></span></span></span><br>
+2、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><mi>S</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>)</mo><mo>=</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">Swap(Swap(p))=p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span></p>
+<p>我们把最外层的Swap()数量存起来为swt<br>
+里层的线性函数l1的a,b；l2的a,b也存起来</p>
+<p>可用线代知识证明<code>1</code>操作即为定义<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mn>1</mn><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>1</mn><mo>∗</mo><mi>x</mi><mo>+</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">l1(x)=-1*x+0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mn>2</mn><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>∗</mo><mi>x</mi><mo>+</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">l2(x)=1*x+0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span><br>
+下<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mo>(</mo><mi>p</mi><mo separator="true">,</mo><mi>l</mi><mn>1</mn><mo separator="true">,</mo><mi>l</mi><mn>2</mn><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">Swap(Linear(p,l1,l2))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span><br>
+其他略</p>
+<p>你已经掌握了足够多的数学知识，相信你一定能看得懂下面的代码。<br>
+加油，试试看！</p>
+<pre><code class="language-cpp">// Problem: E - Rotate and Flip
+// Contest: AtCoder - AtCoder Beginner Contest 189
+// URL: https://atcoder.jp/contests/abc189/tasks/abc189_e
+// Memory Limit: 1024 MB
+// Time Limit: 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+ 
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef vector&lt;int&gt; vi;
+typedef vector&lt;ll&gt; vll;
+#define pb push_back
+ll gi(){
+    ll i=0;bool f=false;char c;
+    while (!isdigit(c=cin.get())&amp;&amp;cin.good()) f=c=='-';
+    if (!cin.good()) return 0;
+    do i=(i&lt;&lt;3)+(i&lt;&lt;1)+c-'0'; while (isdigit(c=cin.get()));
+    return f?-i:i;
+}
+
+struct solution{
+	int n;
+	vector&lt;array&lt;ll,2&gt;&gt; pv;
+	vll axv,bxv,swt;
+	vll ayv,byv;
+	solution(){
+		n=gi();
+		for (int i=1;i&lt;=n;i++)
+			pv.pb({gi(),gi()});
+		axv=bxv=ayv=byv=swt=vll();
+		axv.pb(1);bxv.pb(0);
+		ayv.pb(1);byv.pb(0);
+		swt.pb(0);
+		int qs=gi();
+		for (int i=1;i&lt;=qs;i++){
+			int q=gi();
+			if (q==1){
+				auto f=[](vll &amp;axv,vll &amp;bxv,vll &amp;ayv,vll &amp;byv){
+					ll ax=axv.back();ll bx=bxv.back();
+					ll ay=ayv.back();ll by=byv.back();
+					ayv.pb(ay);byv.pb(by);
+					axv.pb(-ax);bxv.pb(-bx);
+				};
+				if (swt.back()) f(ayv,byv,axv,bxv);
+				else f(axv,bxv,ayv,byv);
+				swt.pb(!swt.back());
+			}else if (q==2){
+				auto f=[](vll &amp;axv,vll &amp;bxv,vll &amp;ayv,vll &amp;byv){
+					ll ax=axv.back();ll bx=bxv.back();
+					ll ay=ayv.back();ll by=byv.back();
+					ayv.pb(-ay);byv.pb(-by);
+					axv.pb(ax);bxv.pb(bx);
+				};
+				if (swt.back()) f(ayv,byv,axv,bxv);
+				else f(axv,bxv,ayv,byv);
+				swt.pb(!swt.back());
+			}else if (q==4){
+				auto f=[](vll &amp;axv,vll &amp;bxv,vll &amp;ayv,vll &amp;byv){
+					ll d=gi();
+					ll ax=axv.back();ll bx=bxv.back();
+					ll ay=ayv.back();ll by=byv.back();
+					axv.pb(ax);bxv.pb(bx);
+					ayv.pb(-ay);byv.pb(2*d-by);
+				};
+				if (swt.back()) f(ayv,byv,axv,bxv);
+				else f(axv,bxv,ayv,byv);
+				swt.pb(swt.back());
+			}else if (q==3){	
+				auto f=[](vll &amp;axv,vll &amp;bxv,vll &amp;ayv,vll &amp;byv){
+					ll d=gi();
+					ll ax=axv.back();ll bx=bxv.back();
+					ll ay=ayv.back();ll by=byv.back();
+					axv.pb(-ax);bxv.pb(2*d-bx);
+					ayv.pb(ay);byv.pb(by);
+				};
+				if (swt.back()) f(ayv,byv,axv,bxv);
+				else f(axv,bxv,ayv,byv);
+				swt.pb(swt.back());
+			}
+			#undef int
+		}
+	}
+	
+	void solve(){
+		int q=gi();
+		while (q--){
+			int a=gi(),b=gi()-1;
+			ll x=pv[b][0],y=pv[b][1];
+			x=axv[a]*x+bxv[a];
+			y=ayv[a]*y+byv[a];
+			if (swt[a]) swap(x,y);
+			cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; endl;
+		}
+	}
+};
+ 
+int main(){
+	ios::sync_with_stdio(false);
+	solution().solve();
+}
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://z3475.work/post/ccchang-jian-de-keng/">
+                  <h3 class="post-title">
+                    一些C/C++常见的坑
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+
+              
+                <div id="disqus_thread" data-aos="fade-in"></div>
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+
+  
+    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+    <script>
+
+    var options = {
+      shortname: '',
+      apikey: 'IVIL72EYupd36SyIZbzIyzGD5IO6YAvkOuAfe1DsVeTm8qLc2h6ZegTM2fCaLGAe',
+    }
+    if ('') {
+      options.api = ''
+    }
+    var dsqjs = new DisqusJS(options)
+
+    </script>
+  
+
+
+
+
+  </body>
+</html>

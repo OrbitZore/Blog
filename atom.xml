@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://z3475.work</id>
     <title>z3475&apos;s Blog</title>
-    <updated>2021-01-15T06:40:52.832Z</updated>
+    <updated>2021-01-23T15:10:04.778Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://z3475.work"/>
     <link rel="self" href="https://z3475.work/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://z3475.work/images/avatar.png</logo>
     <icon>https://z3475.work/favicon.ico</icon>
     <rights>All rights reserved 2021, z3475&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[【思路/代码】AtCoder Beginner Contest 189【DE】]]></title>
+        <id>https://z3475.work/post/si-lu-dai-ma-atcoder-beginner-contest-189de/</id>
+        <link href="https://z3475.work/post/si-lu-dai-ma-atcoder-beginner-contest-189de/">
+        </link>
+        <updated>2021-01-23T14:21:27.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[一些C/C++常见的坑]]></title>
         <id>https://z3475.work/post/ccchang-jian-de-keng/</id>
