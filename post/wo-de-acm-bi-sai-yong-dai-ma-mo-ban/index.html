@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>z3475&#39;s Blog</title>
 <meta name="description" content="学习，思考，输出" />
-<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1614519048456">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1614683515606">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://z3475.work">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1614519048456" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1614683515606" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">z3475&#39;s Blog</h1>
       </div>
@@ -94,12 +94,15 @@
 <li>引入简化版std::format,特化可迭代容器,可以很方便的输出vector</li>
 <li>常用的cmax和cmin函数</li>
 <li>gcd和exgcd和lcm的实现</li>
+<li>optional&lt;T&gt;的实现</li>
+<li>int和long long友好型无限值</li>
+<li>多组数据支持</li>
+<li>solution类，不用担心手写资源重置了</li>
 </ul>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 #define pb push_back
 #define eb emplace_back
 using namespace std;
-using int64=int;
 #define int long long
 #define all(a) (a).begin(), (a).end()
 #define f first
@@ -222,7 +225,7 @@ struct solution{
 	} 
 };
 
-int64 main(){
+unsigned main(){
 	ios::sync_with_stdio(false);
 	int T=1;
 	while (T--){
