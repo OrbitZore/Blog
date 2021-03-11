@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>z3475&#39;s Blog</title>
 <meta name="description" content="学习，思考，输出" />
-<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1615216762441">
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1615477086516">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://z3475.work">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1615216762441" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1615477086516" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">z3475&#39;s Blog</h1>
       </div>
@@ -91,22 +91,20 @@
 <ul>
 <li>使用ACM常用的C++11标准</li>
 <li>定义了比赛常用long long,vector的简化名称</li>
-<li>引入简化版std::format,特化可迭代容器,可以很方便的输出vector</li>
+<li>引入简化版std::format,特化可迭代容器及元组,可以很方便的输出vector,map,tuple等STL自带数据结构</li>
 <li>常用的cmax和cmin函数</li>
-<li>gcd和exgcd和lcm的实现</li>
-<li>optional&lt;T&gt;的实现</li>
-<li>int和long long友好型无限值</li>
+<li>类型友好型无限值</li>
 <li>多组数据支持</li>
-<li>solution类，不用担心手写资源重置了</li>
+<li>solution类，不用为手写资源重置操心了</li>
 </ul>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using INT=int;
+//#define int long long
 #define pb push_back
 #define eb emplace_back
+#define all(a) (a).begin(),(a).end()
 using namespace std;
-#define int long long
-#define all(a) (a).begin(), (a).end()
-#define f first
-#define s seconda
+auto &amp;_=std::ignore;
 using ll=long long;
 using vi=vector&lt;int&gt;;
 using vll=vector&lt;ll&gt;;
@@ -114,52 +112,44 @@ using vvi=vector&lt;vector&lt;int&gt;&gt;;
 using vvll=vector&lt;vector&lt;ll&gt;&gt;;
 using pii=pair&lt;int,int&gt;;
 using pll=pair&lt;ll,ll&gt;;
-
-const struct INF_t{
-	#ifndef int
-	constexpr operator int()const {return 0x3f3f3f3f;}
-	#endif
-	constexpr operator ll()const {return 0x3f3f3f3f3f3f3f3f;}
+constexpr struct{
+	template&lt;class T&gt;
+	constexpr operator T()const {return numeric_limits&lt;T&gt;::max();}
 } INF;
-using namespace std::placeholders;
+constexpr struct{
+	template&lt;class T&gt;
+	constexpr operator T()const {return numeric_limits&lt;T&gt;::min();}
+} MINF;
 template&lt;class T&gt;
-struct opt{
-	bool ini;T _a;
-	opt():ini(false){}
-	opt(const T &amp;a):ini(true),_a(a){}
-	opt(T &amp;&amp;a):ini(true),_a(a){}
-	opt(opt&lt;T&gt; &amp;&amp;o):ini(o.ini){if (ini) _a=o._a;}
-	T&amp; set(const T &amp;a){ini=true;return _a=a;}
-	T&amp; set(T &amp;&amp;a){ini=true;return _a=a;}
-	void reset(){ini=false;}
-	operator bool(){return ini;}
-	T* operator-&gt;(){return &amp;_a;}
-	T&amp; operator*(){return _a;}
-};
-template&lt;class T, class U&gt;
-opt&lt;U&gt; mget(map&lt;T, U&gt; &amp;mp, T k) {
-    auto it=mp.find(k);
-    if (it!=mp.end()) return it-&gt;second;
-    return opt&lt;U&gt;();
-}
-template&lt;class T&gt;
-auto _format(ostream &amp;os,const char *c,T&amp;&amp; cv)-&gt;decltype(os&lt;&lt;cv,c+1){
-	if (*++c=='.') os &lt;&lt; setprecision(*++c-'0'+1);
+auto _format(ostream &amp;os,const char *c,const T&amp; cv)-&gt;decltype(os&lt;&lt;cv,c+1){
 	os &lt;&lt; cv;
 	while (*c!='}') c++;
 	return c+1;
 }
+template&lt;size_t i,class T&gt;
+auto _format(ostream &amp;os,const char *c,const T&amp; cv)-&gt;decltype(
+typename enable_if&lt;i==tuple_size&lt;T&gt;::value&gt;::type(1),c+1){return c;}
+template&lt;size_t i=0,class T&gt;
+auto _format(ostream &amp;os,const char *c,const T&amp; cv)-&gt;decltype(
+typename enable_if&lt;i!=tuple_size&lt;T&gt;::value&gt;::type(1),c+1){
+	while (*c!='{') os &lt;&lt; *c++;
+	c=_format(os,c,get&lt;i&gt;(cv));
+	return _format&lt;i+1&gt;(os,c,cv);
+}
 template&lt;class T&gt;
-auto _format(ostream &amp;os,const char *c,T&amp;&amp; cv)-&gt;decltype(
-typename enable_if&lt;!is_same&lt;typename decay&lt;T&gt;::type,string&gt;::value,string&gt;::type(&quot;test&quot;),
-begin(cv),c+1){
+auto _format(ostream &amp;os,const char *c,const T&amp; cv)-&gt;decltype(begin(cv),c+1){
 	const char *ct=c+1;
+	size_t ic=0;
 	for (auto &amp;i:cv){
 		const char *cc=c+1;
-		while (*cc!='{') os &lt;&lt; *cc++;
+		while (*cc!='{'){
+			if (*cc=='i') os &lt;&lt; ic,cc++;
+			else os &lt;&lt; *cc++;
+		}
 		cc=_format(os,cc,i);
 		while (*cc!='}') os &lt;&lt; *cc++;
 		ct=cc;
+		ic++;
 	}
 	return ct+1;
 }
@@ -173,6 +163,11 @@ string format(const char *c,const T &amp;a,Args&amp;&amp; ...rest){
 }
 template&lt;class ...Args&gt;
 ostream&amp; print(Args&amp;&amp; ...rest){return cout&lt;&lt;format(forward&lt;Args&gt;(rest)...);}
+#ifdef LOCAL
+#define debug(...) cerr&lt;&lt;format(__VA_ARGS__)
+#else
+#define debug(...) cerr
+#endif
 template&lt;class T&gt;
 void _read(istream&amp; is,T &amp;a){is&gt;&gt;a;}
 void _read(istream&amp; is,ll &amp;a){
@@ -194,30 +189,19 @@ void reada(vector&lt;T&gt;&amp; v,size_t n){
 		v.emplace_back(move(a));
 	}
 }
-
 template&lt;class T1,class T2&gt;
-bool cmin(T1 &amp;a,const T2 b){return b&lt;a?a=b,1:0;}
+bool cmin(T1 &amp;a,const T2 b){return a&gt;b?a=b,1:0;}
 template&lt;class T1,class T2&gt;
 bool cmax(T1 &amp;a,const T2 b){return a&lt;b?a=b,1:0;}
 template&lt;class T1,class T2,class ...T3&gt;
 bool cmin(T1 &amp;a,const T2 b,const T3 ...rest){return cmin(a,b)|cmin(a,rest...);}
 template&lt;class T1,class T2,class ...T3&gt;
 bool cmax(T1 &amp;a,const T2 b,const T3 ...rest){return cmax(a,b)|cmax(a,rest...);}
-ll ceildiv(ll a,ll b){return a/b+(a%b?1:0);}
-ll gcd(ll a,ll b){return b?gcd(b,a%b):a;}
-ll lcm(ll a,ll b){return a*b/gcd(a,b);}
-tuple&lt;ll,ll,ll&gt; exgcd(ll a,ll b){
-	if (b==0) return {a,1,0};
-	ll g,x,y;
-	tie(g,x,y)=exgcd(b,a%b);
-	return {g,y,x-a/b*y};
-}
-ll power(ll a,ll b,const ll m){return b==0?1:((b&amp;1)?a:1)*power(a*a%m,b&gt;&gt;1,m)%m;}
-
+bool MULTIDATA=true;
 struct solution{
-	
+
 	void scan(){
-		
+        
 	}
 	
 	void solve(){
@@ -225,9 +209,12 @@ struct solution{
 	} 
 };
 
-unsigned main(){
+
+INT main(){
+	cin.tie(0);
 	ios::sync_with_stdio(false);
 	int T=1;
+	if (MULTIDATA) read(T);
 	while (T--){
 		auto a=unique_ptr&lt;solution&gt;(new solution());
 		a-&gt;scan();
@@ -236,6 +223,38 @@ unsigned main(){
 	}
 	return 0;
 }
+</code></pre>
+<p>使用例（仅重写solution类）：</p>
+<pre><code class="language-cpp">struct solution{
+	map&lt;int,int&gt; m;
+	void scan(){
+
+	}
+	
+	void solve(){
+		for (int i=0;i&lt;12;i++) m[rand()]=rand();
+		m[-2]=INF;
+		m[-1]=MINF;
+		print(&quot;{}\n{i=({},{})\n}&quot;,m.size(),m);
+	} 
+};
+</code></pre>
+<p>输出（可能的）：</p>
+<pre><code>14
+0=(-2,2147483647)
+1=(-1,-2147483648)
+2=(153,3902)
+3=(491,9961)
+4=(5436,4827)
+5=(11942,2995)
+6=(14604,32391)
+7=(15724,19169)
+8=(16827,23281)
+9=(18467,41)
+10=(24464,26962)
+11=(26500,6334)
+12=(28145,5705)
+13=(29358,11478)
 </code></pre>
 
         </div>
