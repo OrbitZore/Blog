@@ -1,0 +1,328 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>z3475&#39;s Blog</title>
+<meta name="description" content="学习，思考，输出" />
+<link rel="shortcut icon" href="https://z3475.work/favicon.ico?v=1615726469410">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://z3475.work/styles/main.css">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-186019365-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-186019365-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://z3475.work">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://z3475.work/images/avatar.png?v=1615726469410" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">z3475&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BA%8B%E6%83%85%E7%9A%84%E8%B5%B7%E5%9B%A0">事情的起因</a></li>
+<li><a href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE">树莓派配置</a></li>
+<li><a href="#ax5%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE">ax5路由器配置</a></li>
+<li><a href="#%E6%B5%8B%E9%80%9F">测速！</a></li>
+<li><a href="#%E5%B1%95%E6%9C%9B">展望</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://z3475.work/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">突破登录设备数量限制！湖科大网络世界生存教程</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-03-13 / 5 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://z3475.work/post-images/tu-po-xiao-yuan-wang-ren-zheng-ji-deng-lu-she-bei-shu-liang-xian-zhi-hu-ke-da-wang-luo-shi-jie-sheng-cun-jiao-cheng.jpg" alt="">
+        
+        <div class="post-content yue">
+          <p>图源：《东方铃奈庵》 第38话 信息的霸者是萃还是散 前篇P19-喵玉汉化</p>
+<h3 id="事情的起因">事情的起因</h3>
+<p>我的设备太多了：树莓派、笔记本电脑、手机、ESP8266等设备均需要连上寝室的wifi。然而校园网ban掉了路由器以及限制同时在线设备数量为2。这我就很不爽，明明是在运营商那里办的宽带，和家庭宽带一个性质，怎么还不能像家宽一样不限制设备数量，不限制路由器等入网设备？</p>
+<p>甚至于，登录校园网这个操作完全是多余的。虽然只需curl一下就可登录，但是每台设备不同平台部署起来非常麻烦。而且仍然突破不了在线设备数量限制，甚是不爽。</p>
+<p>再加上，校园网是wifi5，最多只能跑百兆。在寝室走校园网串流游戏体验极差，由于我的笔记本和手机均支持wifi6，把底层网络升级到wifi6能有目前（几乎）顶尖的寝室内串流游戏体验。</p>
+<p>后来发现，PC上的虚拟机设置NAT模式，网络仍然通畅。这暗示了把路由器伪装成PC是一个不错的思路。</p>
+<p>把路由器伪装成PC的话，那些可以刷固件的路由器都太老了，早就跑不了wifi6。必须上一个市面上带wifi6的设备。而这就不能伪装成PC，如果ssh可以操作的话，也会因为无线中继模式损失性能。软路由的话，能上wifi6的软路由只有用x86方案，然而相比于路由器，价钱更贵，而我正好有一个树莓派，百兆无线，千兆有线网卡刚好能夹在wifi6路由器和校园网之间。既避免了无线中继模式损失性能，又利用了吃灰的<s>废物</s>好物，实在是一举两得。</p>
+<p>校园网-wifi-软路由-百兆网线-wifi6路由器-wifi6&amp;千兆网线-终端</p>
+<p>在市场上经过一番比较后，发现200元左右的红米ax5性价比极高，也可以满足千兆内网的需求，遂购入ax5。</p>
+<figure data-type="image" tabindex="1"><img src="https://z3475.work/post-images/1615212769032.png" alt="" loading="lazy"></figure>
+<p>组网示意图</p>
+<h3 id="树莓派配置">树莓派配置</h3>
+<p>树莓派上的软路由系统使用：<a href="https://github.com/SuLingGG/OpenWrt-Rpi">SuLingGG/OpenWrt-Rpi</a></p>
+<p>使用Raspberry Pi Imager将系统刷入SD卡</p>
+<figure data-type="image" tabindex="2"><img src="https://z3475.work/post-images/1615724211310.png" alt="" loading="lazy"></figure>
+<p>插入SD进树莓派，使用网线连接树莓派和笔记本电脑（确保笔记本电脑网段192.168.1.1/24空闲）。插电，树莓派自动启动，电脑访问http://192.168.1.1即可进入OpenWRT管理界面（默认用户名root，密码password）登入。</p>
+<figure data-type="image" tabindex="3"><img src="https://z3475.work/post-images/1615724217737.png" alt="" loading="lazy"></figure>
+<p>把系统-系统属性-主机名改成更DESKTOP一点的名字，避免被识别为路由器</p>
+<figure data-type="image" tabindex="4"><img src="https://z3475.work/post-images/1615724222865.png" alt="" loading="lazy"></figure>
+<p>然后去网络-无线扫描WIFI，连上iHNUST</p>
+<figure data-type="image" tabindex="5"><img src="https://z3475.work/post-images/1615724239057.png" alt="" loading="lazy"></figure>
+<p>网络-接口-WLAN0：设置DHCP客户端</p>
+<figure data-type="image" tabindex="6"><img src="https://z3475.work/post-images/1615724251140.png" alt="" loading="lazy"></figure>
+<p>网络-接口-LAN：设置静态IP</p>
+<figure data-type="image" tabindex="7"><img src="https://z3475.work/post-images/1615724259587.png" alt="" loading="lazy"></figure>
+<p>网络-接口-LAN：设置桥接</p>
+<figure data-type="image" tabindex="8"><img src="https://z3475.work/post-images/1615724270026.png" alt="" loading="lazy"></figure>
+<p>此时电脑应该可以访问login.hnust.cn登录帐号正常上网了，树莓派以及其所有子网设备均可以访问login.hnust.cn并共享登录状态。</p>
+<h3 id="ax5路由器配置">ax5路由器配置</h3>
+<p>上网设置设置成DHCP，自动配置DNS</p>
+<figure data-type="image" tabindex="9"><img src="https://z3475.work/post-images/1615724278851.png" alt="" loading="lazy"></figure>
+<p>其他就按照普通路由器来设置就行了。</p>
+<h3 id="测速">测速！</h3>
+<p>有线连接路由器到外网</p>
+<figure data-type="image" tabindex="10"><img src="https://z3475.work/post-images/1615724284741.png" alt="" loading="lazy"></figure>
+<p>有线连接路由器到树莓派</p>
+<figure data-type="image" tabindex="11"><img src="https://z3475.work/post-images/1615724292184.png" alt="" loading="lazy"></figure>
+<p>有线连接路由器到wifi6设备</p>
+<figure data-type="image" tabindex="12"><img src="https://z3475.work/post-images/1615724299454.png" alt="" loading="lazy"></figure>
+<p>wifi6设备互测</p>
+<figure data-type="image" tabindex="13"><img src="https://z3475.work/post-images/1615724305042.png" alt="" loading="lazy"></figure>
+<p>内网千兆，外网五十兆，内网到外网速度慢极有可能是树莓派自带wifi过墙效果不好。等几天后换个更好的无线网卡试试。</p>
+<p><s>其实已经有一张RTL8812AU，但是因为驱动问题无法在OpenWRT环境下使用</s></p>
+<h3 id="展望">展望</h3>
+<figure data-type="image" tabindex="14"><img src="https://z3475.work/post-images/1615724310861.jpg" alt="" loading="lazy"></figure>
+<p>来一张设备图（原谅我糟糕的走线）</p>
+<p>以后在寝室搞物联网终于不用被动接受于校园网俩台设备的限制啦</p>
+<p>而且呢，软路由还有很多好玩的东西，在这列举几个我喜欢用的</p>
+<ul>
+<li>服务-Docker：万物皆可虚拟化，刚好可以跑RSSHub</li>
+<li>服务-解锁网易云灰色歌曲：使用[QQ/虾米/百度/酷狗/酷我/咪咕/JOOX]等音源，重定向网易云变灰歌曲。支持网易云音乐各平台客户端，用过的都说好。</li>
+<li>服务-OpenClash：懂得都懂</li>
+<li>网络存储-Transmission：路由器上的BT客户端，下番剧刚刚好</li>
+<li>网络存储-网络共享-Samba：网络硬盘</li>
+<li>网络存储-BaiduPCS-Web：百度云盘路由器网页版客户端</li>
+<li>VPN-ZeroTier：傻瓜式操作内网穿透搭建虚拟局域网</li>
+</ul>
+<p>如果有配置上的问题可以联系我尝试协助解决。</p>
+<p>我为什么要做出这种事呢，因为<strong>互联网本该这样</strong>。</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/Zm4fKWntr/">
+            <span class="flex-auto">网络</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://z3475.work/tag/JFA7ix-h8f/">
+            <span class="flex-auto">互联网</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://z3475.work/post/zai-ubuntu-shang-shi-yong-gcc-jiao-cha-bian-yi/">
+                <h3 class="post-title">
+                  在Ubuntu上使用gcc交叉编译
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'z3475blog',
+  apikey: 'vCbqxZEJdgQyJSamyoWZcAVqQooZpy4Mfg47IFf2SE64TOqO0SQjA3iOMGGZDCVc',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://z3475.work/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
